@@ -4,7 +4,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         git unzip libzip-dev libpng-dev libjpeg-dev libfreetype6-dev libonig-dev libcurl4-openssl-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) pdo_mysql mysqli gd zip curl opcache \
+    && docker-php-ext-install -j$(nproc) pdo_mysql mysqli gd zip curl opcache bcmath \
     && a2enmod rewrite headers \
     && rm -rf /var/lib/apt/lists/*
 
