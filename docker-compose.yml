@@ -7,6 +7,12 @@ services:
       - "8529:80"
     volumes:
       - ./:/var/www/html
+    environment:
+      DB_HOST: ${DB_HOST:-db}
+      DB_DATABASE: ${DB_DATABASE:-acg_faka}
+      DB_USERNAME: ${DB_USERNAME:-acg_faka}
+      DB_PASSWORD: ${DB_PASSWORD:-acg_faka_password_change_me}
+      DB_PREFIX: ${DB_PREFIX:-acg_}
     depends_on:
       - db
 
@@ -14,10 +20,10 @@ services:
     image: mysql:8.0
     command: --default-authentication-plugin=mysql_native_password
     environment:
-      MYSQL_ROOT_PASSWORD: root_password_change_me
-      MYSQL_DATABASE: acg_faka
-      MYSQL_USER: acg_faka
-      MYSQL_PASSWORD: acg_faka_password_change_me
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_password_change_me}
+      MYSQL_DATABASE: ${DB_DATABASE:-acg_faka}
+      MYSQL_USER: ${DB_USERNAME:-acg_faka}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-acg_faka_password_change_me}
     volumes:
       - db_data:/var/lib/mysql
     ports:
